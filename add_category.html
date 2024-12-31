@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+	<body>
+		{% extends 'base.html'%}
+		{%block title%}ADD A NEW CATEGORY{% endblock%}
+		{%block content%}
+	{% if user.is_authenticated %}
+			<h1> ADD CATEGORY</h1>
+		<br>
+		<br>
+			<div class="form-group">
+				<form method="POST" enctype="multipart/ multipart/form-data">
+						{% csrf_token %}
+						{{ form.media}}
+						{{ form.as_p}}
+						<button type="button" class="btn btn-secondary">ADD CATEGORY</button>
+			</div>
+</body>
+</html>
