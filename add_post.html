@@ -1,0 +1,41 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> {% block title %}
+	CREATE A NEW BLOG
+		{% block title %}
+	</title>
+</head>
+<body>
+	{% extends 'base.html'%}
+	
+	{%block content%}
+{% if user.is_authenticated %}
+		<h1> ADD POST</h1>
+	<br>
+	<br>
+	<h1> add post but this JS IN THE HTML on popose</h1>
+		<div class="form-group">
+			<form method="POST" enctype="multipart/ multipart/form-data">
+					{% csrf_token %}
+					{{ form.media}}
+					{{ form.as_p}}
+					<button type="button" class="btn btn-secondary">POST</button>
+		</div>
+<script>
+	var name = "{{ user.id}}"; 
+	document.getElementById("xxx").value= name;
+</script>
+	<h1> post</h1>
+	{%  for post in object_list%}
+<ul>
+	<li><a href="{%  url 'article-detail' post.pk%}">{{post.title}}</a> -{{post.username}}-{{post.first_name}}-{{post.last_name}} {{post.author}} <br>
+	{{post.body}}</li>
+{% endfor%}
+</ul>
+{% endblock%} 
+</body>
+</html>
