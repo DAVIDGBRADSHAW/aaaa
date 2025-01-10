@@ -1,0 +1,50 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	{% extends 'base.html'%}
+
+	{%block content%}
+
+	<h1> the david bradshaw ucd final</h1>
+	<br>
+	<br>
+<ul>
+	{%  for post in object_list %}
+	<li><a href="{%  url 'article-detail' post.pk%}">{{post.title}}</a> 
+		-<a href="{%  url 'category' post.category|slugify %}">-	{{post.category}}</a>
+</ul>		
+		-{{post.author.first_name}}&nbsp;&nbsp;
+		-{{post.author.last_name}} -<br><br>
+		-{{post.email}} - <br><br>
+		-{{post.post_date}} <small>
+	<a href="{% url 'update_post' post.pk%}">EDIT</a>
+
+	- <a href="{% 'delete_post' post.pk%}">DELETE</a> <br>
+	{%  endfor %}
+</small><br>
+{{post.body|slice:":200"|safe}}</li>
+	</li>
+{%  endfor %}
+</ul>
+{% endblock%}
+		{%  if user.is_authenticated %}
+			{%  if user.id == post.author.id %}
+				- <a href="{% 'delete_post' post.pk%}">DELETE</a>
+				-	<a href="{% 'update_post' post.pk%}">Edit</a> 
+		{%  endif%}
+	{%  endif%}	
+	</small><br>
+	{{ post.snippet}}
+{{ post.body|slice":200|safe}}
+
+{% endfor%}
+</ul>
+
+{% endblock%}
+</body>
+</html>

@@ -1,0 +1,51 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title> 	</title>
+</head>
+<body>
+		
+		{% block title %}
+		{{ post.title_tag}}
+		{% endblock %}
+
+		{% block title %}
+
+{% extends 'base.html'%}
+{%  load static %}
+
+{% if category_posts '%}
+<br>
+<h1> CATeGORy - {{cats}}</h1>
+
+{{cats}}
+{% if post '%}
+<br>
+<ul>
+	{%  for post in object_list %}
+	<li><a href="{%  url 'article-detail' post.pk%}">{{post.title}}</a> 
+		-
+		-<a href="{%  url 'category' post.category|slugify%}">{{post_title}}</a>
+		
+		-{{post.first_name}}&nbsp;&nbsp;
+		-{{post.last_name}} -
+		-{{post.email}} -
+		-{{post.post_date}} -
+	<a href="{% url 'update_post' post.pk%}">EDIT</a>
+
+	- <a href="{% 'delete_post' post.pk%}">DELETE</a> <br>
+
+{%  endif %}
+</ul>
+
+{{post.body|slice:":200"|safe}}</li>
+
+{% endfor%}
+</ul>
+
+{% else%}
+ <h1> english in here eg this page does esxists</h1>
+{% endif%}
